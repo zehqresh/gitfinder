@@ -1,20 +1,34 @@
 //imports
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 //get the props that were passed from the parent class into Navbar
 const Navbar = ({icon,title}) => {
 
     return (
-      <div className='nav bg-dark'>
-      <h1><i className={icon} /> {title}</h1>
-      </div>
+      <nav className='navbar bg-dark'>
+        <h1><i className={icon} /> {title}</h1>
+        <ul>
+          <li>
+          <Link to='/'>Home</Link> 
+          </li>
+          <li>
+          <Link to='/about'>About</Link> 
+          </li>
+          </ul>
+      </nav>
     );
   }
 
-Navbar.defaultProps = {
-    title: 'GitFinder',
-    icon:'fab fa-github-alt'
+  Navbar.defaultProps={
+    title:'Github Finder',
+    icon:'fab fa-github'
+  }
+
+Navbar.propTypes = {
+    title: PropTypes.string.isRequired,
+    icon:PropTypes.string.isRequired
   };
 
 

@@ -14,7 +14,13 @@ static propTypes = {
   onsubmit = (e) =>
   {
     e.preventDefault();
-   this.props.searchUser(this.state.text);
+    if(this.state.text===''){
+      this.props.setAlert('Please enter something','danger');
+    }else{
+      this.props.searchUser(this.state.text);
+    }
+    
+   
 }
 
   onChange = e => this.setState({ [e.target.name] : e.target.value  });

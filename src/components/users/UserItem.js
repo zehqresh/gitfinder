@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 //props that are passed in useritem from Users are coming here and passed from here to use in card further
 const UserItem = (props) => {
 
-const {title,avatar_url, html_url} = props.user;
+const {login,title,avatar_url, html_url} = props.user;
 
 //the card that return the one user information
     return (
@@ -13,7 +14,7 @@ const {title,avatar_url, html_url} = props.user;
       <h1>{title}</h1>
 
   <div>
-       <a  href={html_url} className='btn btn-dark btn-sm my-1'>More</a>
+       <Link  to={`/user/${login}`} className='btn btn-dark btn-sm my-1'>More</Link>
   </div>
     </div>
  );
