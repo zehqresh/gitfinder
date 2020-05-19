@@ -1,45 +1,43 @@
-import React from 'react';
+import React,{useState} from 'react';
 import propTypes from 'prop-types';
-class search extends React.Component {
-  state = {
-    text:''
-  }
-static propTypes = {
+const Search = ({clearUsers,searchUser,showClear,setAlert})=> {
+
+   const [text,setText] = useState('');
+
+  //yahn search user function ko call kia gaya ha us m text ko pass kia gya h
+  //or phr vahn as a prop execute hoga
+const  onsubmit = (e) =>
+  {
+    e.preventDefault();
+    if(text===''){
+      setAlert('Please enter something','danger');
+    }else{
+      searchUser(text);
+    }
+
+
+}
+
+const  onChange = e => setText(e.target.value);
+
+    return (
+      <div>
+        <form className='form' onSubmit={onsubmit}>
+        <input type="text" value={text} onChange={onChange}  name="text" placeholder="Search users..." />
+        <input type="submit" name="text" value='Search'  className='btn btn-dark btn-block' />
+    {showClear &&(
+    <button className='btn btn-light btn-block'  onClick={clearUsers}>Clear</button> )
+    }
+
+        </form>
+
+    </div>
+    );
+}
+ Search.propTypes = {
   searchUser: propTypes.func.isRequired,
   clearUsers:propTypes.func.isRequired,
   showClear:propTypes.bool.isRequired
 }
-  //yahn search user function ko call kia gaya ha us m text ko pass kia gya h 
-  //or phr vahn as a prop execute hoga
-  onsubmit = (e) =>
-  {
-    e.preventDefault();
-    if(this.state.text===''){
-      this.props.setAlert('Please enter something','danger');
-    }else{
-      this.props.searchUser(this.state.text);
-    }
-    
-   
-}
 
-  onChange = e => this.setState({ [e.target.name] : e.target.value  });
-
-  render() {
-    return (
-      <div>
-        <form className='form' onSubmit={this.onsubmit}>
-        <input type="text" value={this.state.text} onChange={this.onChange}  name="text" placeholder="Search users..." />
-        <input type="submit" name="text" value='Search'  className='btn btn-dark btn-block' />
-    {this.props.showClear &&( 
-    <button className='btn btn-light btn-block'  onClick={this.props.clearUsers}>Clear</button> )
-    }
-    
-        </form>
-        
-    </div>
-    );
-  }
-}
-
-export default search;
+export default Search;
